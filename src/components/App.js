@@ -1,7 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { handleInitialData } from '../actions/shared';
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { handleInitialData } from "../actions/shared";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Navigation from "./Navigation";
+import Login from "./Login";
+import Home from "./Home";
+import Poll from "./Poll";
+import AddQuestion from "./AddQuestion";
+import Leaderboard from "./Leaderboard";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -9,11 +16,32 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        Starter Code
-      </div>
-    )
+      <Container>
+        <main>
+          <Router>
+            <Navigation />
+            {this.props.isLogin ? (
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/questions/:id" element={<Poll />} />
+                <Route path="/add" element={<AddQuestion />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            ) : (
+              <Login />
+            )}
+          </Router>
+        </main>
+      </Container>
+    );
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    isLogin: authedUser !== null,
+  };
+}
+
+export default connect(mapStateToProps)(App);
