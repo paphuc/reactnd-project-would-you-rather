@@ -8,7 +8,7 @@ import Login from "./Login";
 import Home from "./Home";
 import Poll from "./Poll";
 import AddQuestion from "./AddQuestion";
-import Leaderboard from "./Leaderboard";
+import LeaderBoard from "./LeaderBoard";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -25,7 +25,7 @@ class App extends Component {
                 <Route exact path="/" element={<Home />} />
                 <Route path="/questions/:id" element={<Poll />} />
                 <Route path="/add" element={<AddQuestion />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/leaderboard" element={<LeaderBoard />} />
                 <Route path="/login" element={<Login />} />
               </Routes>
             ) : (

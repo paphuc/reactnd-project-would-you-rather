@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Card, Row, Col } from "react-bootstrap";
 import Login from "./Login";
 
-class Leaderboard extends Component {
+class LeaderBoard extends Component {
   render() {
     const { authedUser } = this.props;
     const users = Object.assign({}, this.props.users);
@@ -68,4 +68,4 @@ function mapStateToProps({ authedUser, users }) {
   };
 }
 
-export default connect(mapStateToProps)(Leaderboard);
+export default connect(mapStateToProps)(LeaderBoard);
