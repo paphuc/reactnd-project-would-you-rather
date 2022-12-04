@@ -4,6 +4,7 @@ import withRouter from "../utils/withRouter";
 import { compose } from "redux";
 import { Card, Badge, Row, Col, ProgressBar } from "react-bootstrap";
 import Login from "./Login";
+import { resetAuthedUser } from "../actions/authedUser";
 
 class Poll extends Component {
   render() {
@@ -13,6 +14,11 @@ class Poll extends Component {
 
     if (authedUser === "") {
       return <Login />;
+    }
+
+    if (question === null) {
+      this.props.dispatch(resetAuthedUser());
+            return <Login />
     }
     const isSelectOptionOne = optionOne.votes.includes(authedUser);
     const isSelectOptionTwo = optionTwo.votes.includes(authedUser);
