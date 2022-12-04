@@ -3,10 +3,15 @@ import { connect } from "react-redux";
 import Answer from "./Answer";
 import Unanswer from "./Unanswer";
 import { Tabs, Tab } from "react-bootstrap";
+import Login from "./Login";
 
 class Home extends Component {
   render() {
     const { authedUser, users, questions } = this.props;
+    console.log("testting ", authedUser)
+    if (authedUser === "" || authedUser === null) {
+      return <Login />;
+    }
     const questionIDs = Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
     );

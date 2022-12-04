@@ -7,7 +7,8 @@ class LeaderBoard extends Component {
   render() {
     const { authedUser } = this.props;
     const users = Object.assign({}, this.props.users);
-    if (authedUser === "") {
+    console.log("authedUser", authedUser);
+    if (authedUser === "" || authedUser === null) {
       return <Login />;
     }
 
@@ -15,7 +16,7 @@ class LeaderBoard extends Component {
       const user = users[key];
       user.answer = Object.keys(user.answers).length;
       user.created = user.questions.length;
-      user.score = user.answer +  user.created;
+      user.score = user.answer + user.created;
     });
 
     //sort users
@@ -26,7 +27,10 @@ class LeaderBoard extends Component {
     return (
       <div>
         {userIDs.map((id) => (
-          <Card key={id} style={{ width: "36rem" , margin: "25px auto auto auto"}}>
+          <Card
+            key={id}
+            style={{ width: "36rem", margin: "25px auto auto auto" }}
+          >
             <Card.Body>
               <Row>
                 <Col sm={3}>

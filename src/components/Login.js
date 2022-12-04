@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Card, Form, Button } from "react-bootstrap";
+import NotFoundPage from "./NotFoundPage";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -13,7 +15,6 @@ class Login extends Component {
     this.setState({ userId });
   };
   handleUserLogin = (e) => {
-    e.preventDefault();
     const { userId } = this.state;
     if (userId !== "Select User" && userId !=="" && userId !==null) {
       this.props.dispatch(setAuthedUser(userId));
@@ -36,7 +37,7 @@ class Login extends Component {
               variant="top"
               src="https://repository-images.githubusercontent.com/224272914/9f688f00-1071-11ea-9187-0162a4e3044c"
             />
-            <Form onSubmit={this.handleUserLogin}>
+            <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label style={{ color: "#30c0a8" }}>Sign in</Form.Label>
                 <Form.Select
@@ -51,9 +52,12 @@ class Login extends Component {
                   ))}
                 </Form.Select>
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Link to={{ pathname: this.props.isNotFound === "true" ? "/PageNotFound" : "/" }}  onClick={this.handleUserLogin}>
+              <Button variant="primary" type="submit" >
                 Submit
               </Button>
+              </Link>
+
             </Form>
           </Card.Body>
         </Card>
@@ -62,9 +66,11 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users }, {isNotFound}) {
+  console.log("got isnotfound: ", isNotFound)
   return {
     users,
+    isNotFound
   };
 }
 

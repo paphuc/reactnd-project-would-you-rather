@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/shared";
 import { Link } from "react-router-dom";
 import { Card, Button, Form } from "react-bootstrap";
+import Login from "./Login";
 
 class AddQuestion extends Component {
   state = {
@@ -30,7 +31,9 @@ class AddQuestion extends Component {
 
   render() {
     const { optionOne, optionTwo } = this.state;
-
+    if (this.props.authedUser === "" || this.props.authedUser === null) {
+      return <Login />;
+    }
     return (
       <Card
         style={{

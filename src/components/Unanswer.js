@@ -16,7 +16,6 @@ class UnansweredQuestion extends Component {
   };
 
   handleAnswer = (e) => {
-    e.preventDefault();
     const { dispatch, question, authedUser } = this.props;
 
     dispatch(handleAnswerQuestion(authedUser, question.id, this.state.answer));
@@ -61,12 +60,12 @@ class UnansweredQuestion extends Component {
                   onChange={this.handleChange}
                 />
               </Form>
-              <Link to={{ pathname: "/questions/" + id }} onClick={this.hello}>
+              <Link to={{ pathname: "/questions/" + id }} onClick={this.handleAnswer}>
                 <Button
                   style={{ backgroundColor: "#31bea7", border: "#31bea7" }}
                   variant="primary"
                   disabled={!this.state.answer}
-                  onClick={this.handleAnswer}
+                  
                 >
                   Submit
                 </Button>

@@ -22,7 +22,6 @@ class App extends Component {
         <main>
           <Router>
             <Navigation />
-            {this.props.isLogin ? (
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/questions/:id" element={<Poll />} />
@@ -31,9 +30,6 @@ class App extends Component {
                 <Route path="/login" element={<Login />} />
                 <Route path="*"element={<NotFoundPage />} />
               </Routes>
-            ) : (
-              <Login />
-            )}
           </Router>
         </main>
       </Container>

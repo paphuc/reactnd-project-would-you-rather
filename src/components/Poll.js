@@ -8,18 +8,22 @@ import { resetAuthedUser } from "../actions/authedUser";
 
 class Poll extends Component {
   render() {
+    console.log("Question: ", this.props.question)
+    console.log("authedUser: ", this.props.authedUser)
+
+    if (this.props.question === null || this.props.question === undefined) {
+      this.props.dispatch(resetAuthedUser());
+      return <Login isNotFound="true"/>;
+    }
+
+    if (this.props.authedUser === "" || this.props.authedUser === null) {
+      return <Login />;
+    }
     const { question, author, authedUser } = this.props;
     const { optionOne, optionTwo } = question
     const { name, avatarURL } = author
 
-    if (authedUser === "") {
-      return <Login />;
-    }
 
-    if (question === null) {
-      this.props.dispatch(resetAuthedUser());
-            return <Login />
-    }
     const isSelectOptionOne = optionOne.votes.includes(authedUser);
     const isSelectOptionTwo = optionTwo.votes.includes(authedUser);
     const optionOneNo = optionOne.votes.length;
@@ -81,6 +85,12 @@ class Poll extends Component {
 
 function mapStateToProps({ authedUser, questions, users }, props) {
   const question = questions[props.params.id];
+  if (authedUser === "" || authedUser === null) {
+    return {
+      authedUser: authedUser,
+      question: question
+    } ;
+  }
   const author = users[question.author]
   return {
     question,
