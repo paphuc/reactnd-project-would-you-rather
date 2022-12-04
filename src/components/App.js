@@ -9,6 +9,8 @@ import Home from "./Home";
 import Poll from "./Poll";
 import AddQuestion from "./AddQuestion";
 import LeaderBoard from "./LeaderBoard";
+import NotFoundPage from "./NotFoundPage";
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -27,6 +29,7 @@ class App extends Component {
                 <Route path="/add" element={<AddQuestion />} />
                 <Route path="/leaderboard" element={<LeaderBoard />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*"element={<NotFoundPage />} />
               </Routes>
             ) : (
               <Login />
